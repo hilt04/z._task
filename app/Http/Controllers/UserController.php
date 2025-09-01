@@ -16,7 +16,7 @@ class UserController extends Controller
         $users = User::all();
 
         // Passa os usuários para uma view chamada 'users.index'
-        return view('login');
+        return view('index');
     }
 
     /**

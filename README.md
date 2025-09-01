@@ -1,7 +1,3 @@
-## Projeto desenvolvido na TreinaWeb Cursos
-
-Desenvolvido no curso de Laravel "Criando um gerenciador de projetos"
-
 z.task
 
 ### Instalando o projeto

@@ -115,10 +115,10 @@
                 <label for="user_type">Tipo de Usuário</label>
                 <select id="user_type" name="user_type_id" required>
                     <option value="">Selecione o tipo</option>
-                    <option value="admin" {{ old('user_type') == 'Administrador' ? 'selected' : '' }}>Administrador</option>
-                    <option value="employee" {{ old('user_type') == 'Funcionário' ? 'selected' : '' }}>Funcionário</option>
+                    <option value="Administrador" {{ old('user_type_id') == 'Administrador' ? 'selected' : '' }}>Administrador</option>
+                    <option value="Funcionário" {{ old('user_type_id') == 'Funcionário' ? 'selected' : '' }}>Funcionário</option>
                 </select>
-                @error('user_type')
+                @error('user_type_id')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>

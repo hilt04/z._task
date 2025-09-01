@@ -13,5 +13,14 @@
                 <a href="{{ route('projetos.index') }}">Projetos</a>
             </li>
         </ul>
+        <div>
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Sair</button>
+                </form>
+            @else
+                <a href="{{ route('index') }}" class="btn btn-primary">Login</a>
+            @endauth
     </div>
 </nav>

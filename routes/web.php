@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::view('/', 'home')->name('home');
+Route::get('/', [UserController::class, 'index'])->name('index');
 
 Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
 Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
@@ -34,6 +34,7 @@ Route::resource('projetos', ProjetoController::class);
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.show');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register.show');
 Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.forgot');

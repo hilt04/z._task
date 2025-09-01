@@ -1,7 +1,7 @@
 <x-layout titulo="z.task">
     <div class="flex flex-col gap-2">
         <div class="grid grid-cols-1 items-stretch gap-2 md:grid-cols-3 md:flex-row">
-           <a href="{{ route('clientes.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 flex-1 h-24 bg-purple-500 text-white">
+           <a href="{{ route('index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 flex-1 h-24 bg-purple-500 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

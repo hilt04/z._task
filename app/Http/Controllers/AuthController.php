@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         // Se o usuário já estiver logado, redirecione
         if (Auth::check()) {
-            return redirect('/dashboard');
+            return redirect('index');
         }
         return view('login');
     }
@@ -41,5 +41,13 @@ class AuthController extends Controller
         throw ValidationException::withMessages([
             'email' => 'E-mail ou senha inválidos.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

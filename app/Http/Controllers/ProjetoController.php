@@ -39,9 +39,13 @@ class ProjetoController extends Controller
      */
     public function store(ProjetoRequest $request): Redirector|RedirectResponse
     {
+        // Garante que $request->input('funcionarios') seja um array, mesmo que não venha na requisição
+        // ou venha como null. Se não vier, será um array vazio.
+        $funcionariosAlocados = $request->input('funcionarios', []);
+
         $estaCriado = Project::criarComFuncionarios(
             $request->except('funcionarios'),
-            $request->funcionarios
+            $funcionariosAlocados // Passa o array (garantido) de funcionários
         );
 
         if (!$estaCriado) {
@@ -52,8 +56,8 @@ class ProjetoController extends Controller
         }
 
         return redirect()
-                ->route('projetos.index')
-                ->with('mensagem', 'Projeto criado com sucesso!');
+            ->route('projetos.index')
+            ->with('mensagem', 'Projeto criado com sucesso!');
     }
 
     /**
@@ -80,9 +84,13 @@ class ProjetoController extends Controller
      */
     public function update(ProjetoRequest $request, Project $projeto): Redirector|RedirectResponse
     {
+        // Garante que $request->input('funcionarios') seja um array, mesmo que não venha na requisição
+        // ou venha como null. Se não vier, será um array vazio.
+        $funcionariosAlocados = $request->input('funcionarios', []);
+
         $estaAtualizado = $projeto->atualizarComFuncionarios(
             $request->except('funcionarios'),
-            $request->funcionarios
+            $funcionariosAlocados // Passa o array (garantido) de funcionários
         );
 
         if (!$estaAtualizado) {
@@ -93,8 +101,8 @@ class ProjetoController extends Controller
         }
 
         return redirect()
-                ->route('projetos.index')
-                ->with('mensagem', 'Projeto atualizado com sucesso!');
+            ->route('projetos.index')
+            ->with('mensagem', 'Projeto atualizado com sucesso!');
     }
 
     /**
@@ -105,7 +113,7 @@ class ProjetoController extends Controller
         $projeto->delete();
 
         return redirect()
-                ->route('projetos.index')
-                ->with('mensagem', 'Projeto apagado com sucesso!');
+            ->route('projetos.index')
+            ->with('mensagem', 'Projeto apagado com sucesso!');
     }
 }

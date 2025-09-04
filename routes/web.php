@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\DemitirFuncionario;
-use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjetoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -18,20 +17,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [UserController::class, 'index'])->name('index')->middleware('check.user.type');
+Route::get('/', [UserController::class, 'dashboard'])->name('index')->middleware('check.user.type');
 
 Route::middleware('check.user.type')->group(function () {
-    Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
-    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
-    Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store');
-    Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
-    Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
-    Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
-
-    Route::resource('funcionarios', FuncionarioController::class)->except('show');
-    Route::patch('funcionarios/{funcionario}/demissao', DemitirFuncionario::class)->name('funcionarios.demitir');
-
+    Route::resource('clients', ClientController::class);
+    Route::resource('employees', EmployeeController::class)->except('show');
+    Route::patch('employees/{employee}/dismiss', [EmployeeController::class, 'dismiss'])->name('employees.dismiss');
     Route::resource('projetos', ProjetoController::class);
+    Route::resource('users', UserController::class);
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.show');
@@ -40,6 +33,3 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register.show');
 Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.forgot');
-
-Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
-Route::post('/create-user', [UserController::class, 'store'])->name('user.store');

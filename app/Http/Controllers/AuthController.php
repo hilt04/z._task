@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         // Se o usuário já estiver logado, redirecione
         if (Auth::check()) {
-            return redirect('/');
+            return redirect('index');
         }
         return view('login');
     }

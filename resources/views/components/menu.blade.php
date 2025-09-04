@@ -6,10 +6,10 @@
             @auth
                 @if(auth()->user()->userType->tipo === 'Administrador')
                     <li class="px-4">
-                        <a href="{{ route('clientes.index') }}">Cliente</a>
+                        <a href="{{ route('clients.index') }}">Cliente</a>
                     </li>
                     <li class="px-4">
-                        <a href="{{ route('funcionarios.index') }}">Funcionários</a>
+                        <a href="{{ route('employees.index') }}">Funcionários</a>
                     </li>
                 @endif
                 <li class="px-4">
@@ -18,7 +18,7 @@
             @endauth
         </ul>
         @auth
-            @if(auth()->user()->userType->tipo === 'Funcionário')
+            @if(auth()->user()->userType->tipo === 'Funcionario')
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const links = document.querySelectorAll('a[href*="clientes"], a[href*="Funcionarios"]');

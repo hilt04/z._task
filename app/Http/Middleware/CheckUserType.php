@@ -23,7 +23,7 @@ class CheckUserType
 
         $user = Auth::user();
 
-        // If user has no user_type_id, deny access
+        // se o usuário não tem tipo definido, negar acesso
         if (!$user->user_type_id) {
             abort(403, 'Acesso negado: Tipo de usuário não definido.');
         }
@@ -34,16 +34,16 @@ class CheckUserType
 
         $userType = $user->userType->tipo;
 
-        // Administrators have access to everything
+        // Administradores têm acesso total
         if ($userType === 'Administrador') {
             return $next($request);
         }
 
-        // Employees only have access to project-related routes
-        if ($userType === 'Funcionario') {
+        // Funcionarios têm acesso restrito
+        if ($userType === 'employee' || $userType === 'Funcionário') {
             $currentRoute = $request->route()->getName();
 
-            // Define allowed routes for employees
+            // define as rotas permitidas para funcionários
             $allowedRoutes = [
                 'projetos.index',
                 'projetos.create',
@@ -56,16 +56,15 @@ class CheckUserType
                 'index' // dashboard/home page
             ];
 
-            // Check if current route is allowed for employees
+            // checar se a rota atual está na lista de permitidas
             if (in_array($currentRoute, $allowedRoutes)) {
                 return $next($request);
             }
-
-            // If route is not allowed, redirect to projects index
+            // se não estiver, redirecionar para a página de projetos com mensagem de erro
             return redirect()->route('projetos.index')->with('error', 'Você só tem acesso à seção de projetos.');
         }
 
-        // If user type is not recognized, deny access
+        // se o tipo de usuário não for reconhecido, negar acesso
         abort(403, 'Acesso negado: Tipo de usuário não autorizado.');
     }
 }

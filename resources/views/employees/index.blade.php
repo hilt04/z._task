@@ -52,7 +52,7 @@
                                 >Excluir</button>
                             </form>
 
-                            <form method="POST" action="{{ route('employees.demitir', $employee) }}" class="inline-block">
+                            <form method="POST" action="{{ route('employees.dismiss', $employee) }}" class="inline-block">
                                 @method('patch')
                                 @csrf
 

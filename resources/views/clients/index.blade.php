@@ -52,7 +52,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <a
-                                href="{{ route('clients.edit', $cliente->id) }}"
+                                href="{{ route('clients.edit', $client->id) }}"
                                 class="bg-blue-500 border rounded-md p-1 px-3 text-white"
                             >Editar</a>
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Client;
+use App\Models\Employee;
+use App\Models\Project;
 
 class UserController extends Controller
 {
@@ -12,7 +15,14 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-        return view('index');
+        $counts = [
+            'users' => User::count(),
+            'clients' => Client::count(),
+            'projects' => Project::count(),
+            'employees' => Employee::count(),
+        ];
+
+        return view('index', compact('counts'));
     }
 
     /**

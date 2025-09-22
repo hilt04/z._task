@@ -24,6 +24,7 @@ Route::middleware('check.user.type')->group(function () {
     Route::resource('employees', EmployeeController::class)->except('show');
     Route::patch('employees/{employee}/dismiss', [EmployeeController::class, 'dismiss'])->name('employees.dismiss');
     Route::resource('projetos', ProjetoController::class);
+    Route::patch('projetos/{projeto}/concluir', [ProjetoController::class, 'concluir'])->name('projetos.concluir');
     Route::resource('users', UserController::class);
 });
 

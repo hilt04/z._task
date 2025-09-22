@@ -18,7 +18,7 @@ class ProjetoController extends Controller
      */
     public function index(): View|Factory
     {
-        $projetos = Project::with('client')->paginate(15);
+        $projetos = Project::with('client')->orderBy('concluido', 'asc')->orderBy('id', 'asc')->paginate(15);
 
         return view('projetos.index', compact('projetos'));
     }
@@ -115,5 +115,15 @@ class ProjetoController extends Controller
         return redirect()
             ->route('projetos.index')
             ->with('mensagem', 'Projeto apagado com sucesso!');
+    }
+
+    public function concluir(Project $projeto): Redirector|RedirectResponse
+    {
+        $projeto->concluido = true;
+        $projeto->save();
+
+        return redirect()
+            ->route('projetos.index')
+            ->with('mensagem', 'Projeto marcado como concluído com sucesso!');
     }
 }

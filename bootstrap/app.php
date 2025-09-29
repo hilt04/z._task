@@ -24,6 +24,11 @@ return Application::configure()
         // channels: __DIR__.'/../routes/channels.php',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        ]);
+
         $middleware->alias([
             'check.user.type' => \App\Http\Middleware\CheckUserType::class,
             'jwt.auth' => \App\Http\Middleware\JwtMiddleware::class,

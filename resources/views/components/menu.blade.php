@@ -7,10 +7,13 @@
 
 <!-- Sidebar -->
 <nav id="sidebarMenu" class="fixed top-0 left-0 h-full w-64 bg-gray-300 p-4 transform -translate-x-full transition-transform duration-300 z-40 flex flex-col justify-between">
-    <div>
+    <div class="text-center">
         <a href="/" class="text-2xl font-semibold block mb-6">z.task</a>
         <ul class="font-medium space-y-2">
             @auth
+                <li>
+                    <a href="{{ route('index') }}" class="block px-4 py-2 rounded hover:bg-gray-400">Página Inicial</a>
+                </li>
                 @if(auth()->user()->userType->tipo === 'Administrador')
                     <li>
                         <a href="{{ route('clients.index') }}" class="block px-4 py-2 rounded hover:bg-gray-400">Clientes</a>

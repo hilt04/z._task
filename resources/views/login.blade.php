@@ -19,8 +19,7 @@
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
-            <button class="btn btn-primary mb-3">Entrar</button><br>
-            <a href="{{ route('users.index') }}" class="btn btn-link">Criar conta</a> |
+            <button class="btn btn-primary w-100 mb-3">Entrar</button><br>
             <a href="{{ route('password.forgot') }}" class="btn btn-link">Esqueci minha senha</a>
         </form>
     </div>

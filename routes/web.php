@@ -25,12 +25,11 @@ Route::middleware('check.user.type')->group(function () {
     Route::patch('employees/{employee}/dismiss', [EmployeeController::class, 'dismiss'])->name('employees.dismiss');
     Route::resource('projetos', ProjetoController::class);
     Route::patch('projetos/{projeto}/concluir', [ProjetoController::class, 'concluir'])->name('projetos.concluir');
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->names('users');
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.show');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register.show');
 Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.forgot');

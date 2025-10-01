@@ -71,7 +71,7 @@ class UserController extends Controller
             'user_type_id' => $userType->id
         ]);
 
-        return redirect()->route('index')->with('success', 'Usuário criado com sucesso!');
+        return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
     }
 
 

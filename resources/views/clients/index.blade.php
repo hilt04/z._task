@@ -2,7 +2,7 @@
     <div class="flex justify-end my-3">
         <a
             class="bg-green-500 border rounded-md p-1 px-3 text-white"
-            href="{{ route('clientes.create') }}"
+            href="{{ route('clients.create') }}"
         >Criar cliente</a>
     </div>
 
@@ -28,19 +28,19 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($clientes as $cliente)
+                @forelse($clients as $client)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-white-900 whitespace-nowrap dark:text-white">
-                            {{ $cliente->nome }}
+                            {{ $client->nome }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $cliente->endereco }}
+                            {{ $client->endereco }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $cliente->descricao }}
+                            {{ $client->descricao }}
                         </td>
                         <td class="px-6 py-4">
-                            @forelse ($cliente->projects as $projeto)
+                            @forelse ($client->projects as $projeto)
                                 @if ($loop->last) 
                                     {{ $projeto->nome }}
                                 @else
@@ -52,11 +52,11 @@
                         </td>
                         <td class="px-6 py-4">
                             <a
-                                href="{{ route('clientes.edit', $cliente->id) }}"
+                                href="{{ route('clients.edit', $client->id) }}"
                                 class="bg-blue-500 border rounded-md p-1 px-3 text-white"
                             >Editar</a>
 
-                            <form method="POST" action="{{ route('clientes.destroy', $cliente->id) }}" class="inline-block">
+                            <form method="POST" action="{{ route('clients.destroy', $client->id) }}" class="inline-block">
                                 @method('delete')
                                 @csrf
 
@@ -80,7 +80,7 @@
         </table>
 
         <div class="my-4">
-            {{ $clientes->links() }}
+            {{ $clients->links() }}
         </div>
     </div>
 </x-layout>

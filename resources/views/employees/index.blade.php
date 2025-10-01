@@ -2,7 +2,7 @@
     <div class="flex justify-end my-3">
         <a
             class="bg-green-500 border rounded-md p-1 px-3 text-white"
-            href="{{ route('funcionarios.create') }}"
+            href="{{ route('employees.create') }}"
         >Criar Funcionário</a>
     </div>
 
@@ -25,24 +25,24 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($funcionarios as $funcionario)
+                @forelse($employees as $employee)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $funcionario->nome }}
+                            {{ $employee->nome }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $funcionario->cpf }}
+                            {{ $employee->cpf }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $funcionario->address->endereco_completo }}
+                            {{ $employee->address->endereco_completo }}
                         </td>
                         <td class="px-6 py-4">
                             <a
-                                href="{{ route('funcionarios.edit', $funcionario->id) }}"
+                                href="{{ route('employees.edit', $employee->id) }}"
                                 class="bg-blue-500 border rounded-md p-1 px-3 text-white"
                             >Editar</a>
 
-                            <form method="POST" action="{{ route('funcionarios.destroy', $funcionario->id) }}" class="inline-block">
+                            <form method="POST" action="{{ route('employees.destroy', $employee->id) }}" class="inline-block">
                                 @method('delete')
                                 @csrf
 
@@ -52,16 +52,16 @@
                                 >Excluir</button>
                             </form>
 
-                            <form method="POST" action="{{ route('funcionarios.demitir', $funcionario) }}" class="inline-block">
+                            <form method="POST" action="{{ route('employees.dismiss', $employee) }}" class="inline-block">
                                 @method('patch')
                                 @csrf
 
                                 <button
                                     class="bg-pink-500 border rounded-md p-1 px-3 text-white disabled:bg-gray-300"
                                     onclick="return confirm('Deseja realmente demitir esse funcionário?')"
-                                    {{ $funcionario->data_demissao ? 'disabled' : '' }}
+                                    {{ $employee->data_demissao ? 'disabled' : '' }}
                                 >
-                                    {{ $funcionario->data_demissao ? 'Demitido' : 'Demitir' }}
+                                    {{ $employee->data_demissao ? 'Demitido' : 'Demitir' }}
                                 </button>
                             </form>
                         </td>
@@ -78,7 +78,7 @@
         </table>
 
         <div class="my-4">
-            {{ $funcionarios->links() }}
+            {{ $employees->links() }}
         </div>
     </div>
 </x-layout>

@@ -9,36 +9,36 @@ use App\Http\Requests\ClienteRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 
-class ClienteController extends Controller
+class ClientController extends Controller
 {
     /**
      * Lista os clientes do banco de dados
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
     public function index()
     {
-        $clientes = Client::paginate(15);
-        $clientes->load('projects');
+        $clients = Client::paginate(15);
+        $clients->load('projects');
 
-        return view('clientes.index', [
-            'clientes' => $clientes
+        return view('clients.index', [
+            'clients' => $clients
         ]);
     }
 
     /**
      * Mostra o formulário de cadastro de clientes
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
     public function create()
     {
-        return view('clientes.create');
+        return view('clients.create');
     }
 
     /**
      * Grava o cliente no banco de dados
-     * 
+     *
      * @return Redirector|RedirectResponse
      */
     public function store(ClienteRequest $request)
@@ -46,45 +46,45 @@ class ClienteController extends Controller
         Client::create($request->all());
 
         return redirect()
-            ->route('clientes.index')
+            ->route('clients.index')
             ->with('mensagem', 'Cliente cadastrado com sucesso!');
     }
 
     /**
      * Mostra o formulário preenchido para edição
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
-    public function edit(Client $cliente)
+    public function edit(Client $client)
     {
-        return view('clientes.edit', compact('cliente'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
      * Atualiza um cliente no banco de dados
-     * 
+     *
      * @return Redirector|RedirectResponse
      */
-    public function update(ClienteRequest $request, Client $cliente)
+    public function update(ClienteRequest $request, Client $client)
     {
-        $cliente->update($request->all());
+        $client->update($request->all());
 
         return redirect()
-            ->route('clientes.index')
+            ->route('clients.index')
             ->with('mensagem', 'Cliente atualizado com sucesso!');
     }
 
     /**
      * Apaga um cliente do banco de dados
-     * 
+     *
      * @return Redirector|RedirectResponse
      */
-    public function destroy(Client $cliente)
+    public function destroy(Client $client)
     {
-        $cliente->delete();
+        $client->delete();
 
         return redirect()
-            ->route('clientes.index')
+            ->route('clients.index')
             ->with('mensagem', 'Cliente deletado com sucesso!');
     }
 }

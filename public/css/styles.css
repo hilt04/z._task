@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, rgb(153, 1, 254), rgb(31, 34, 192));
+    background: linear-gradient(135deg, rgb(235, 1, 1), rgb(31, 34, 192));
     display: flex;
     flex-direction: column;
     align-items: center;

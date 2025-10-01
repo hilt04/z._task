@@ -11,8 +11,8 @@
     <input
         type="text"
         id="nome"
-        name="{{ isset($usuario) ? 'name' : 'nome' }}"
-        value="{{ old(isset($usuario) ? 'name' : 'nome', $usuario->name ?? '') }}"
+        name="name"
+        value="{{ old('name', $usuario->name ?? '') }}"
         required
         class="shadow-sm bg-black border border-black text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-black-500 block w-full p-2.5 mb-5 dark:bg-white dark:border-black dark:placeholder-gray-400 dark:text-black dark:focus:ring-white-500 dark:focus:border-black-500 dark:shadow-sm-light"
         placeholder="Digite o nome"
@@ -47,8 +47,8 @@
         required
         class="shadow-sm bg-black border border-black text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-black-500 block w-full p-2.5 mb-8 dark:bg-white dark:border-black dark:placeholder-gray-400 dark:text-black dark:focus:ring-white-500 dark:focus:border-black-500 dark:shadow-sm-light"
     >
-        <option value="Administrador" {{ (old('user_type_id', $usuario->userType->tipo ?? '') == 'Administrador') ? 'selected' : '' }}>Administrador</option>
-        <option value="Funcionário" {{ (old('user_type_id', $usuario->userType->tipo ?? '') == 'Funcionário') ? 'selected' : '' }}>Funcionário</option>
+        <option value="1" @selected((old('user_type_id', $usuario->user_type_id ?? '')) == 1)>Administrador</option>
+        <option value="2" @selected((old('user_type_id', $usuario->user_type_id ?? '')) == 2)>Funcionário</option>
     </select>
 
     <button 

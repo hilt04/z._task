@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -12,21 +15,20 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        UserType::uptadeOrCreate(
+        UserType::updateOrCreate(
             ['id' => 1],
             ['tipo' => 'Administrador']
         );
 
-        UserType::uptadeOrCreate(
+        UserType::updateOrCreate(
             ['id' => 2],
             ['tipo' => 'Funcionário']
         );
 
-        User::uptadeOrCreate(
+        User::updateOrCreate(
             ['email' => 'admin@admin.com'],
             [
                 'name' => 'Admin',
-                'email' => 'admin@admin.com',
                 'password' => Hash::make('admin'),
                 'user_type_id' => 1,
                 'email_verified_at' => now()

@@ -51,17 +51,24 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'user_type_id' => 'required|exists:user_types,id',
+            'user_type_id' => 'required|in:Administrador,Funcionário',
         ]);
 
+        // Get the user type ID from the tipo
+        $userType = \App\Models\UserType::where('tipo', $validated['user_type_id'])->first();
+
+        if (!$userType) {
+            return back()->withErrors(['user_type_id' => 'Tipo de usuário inválido.'])->withInput();
+        }
+
         User::create([
-            'name' => $validated['name'],
+            'name' => $validated['nome'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'user_type_id' => $validated['user_type_id']
+            'password' => bcrypt($validated['password']),
+            'user_type_id' => $userType->id
         ]);
 
         return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
@@ -93,13 +100,20 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'user_type_id' => 'required|exists:user_types,id',
+            'user_type_id' => 'required|in:Administrador,Funcionário',
         ]);
+
+        // Pega o tipo de usuário pelo ID
+        $userType = \App\Models\UserType::where('tipo', $validated['user_type_id'])->first();
+
+        if (!$userType) {
+            return back()->withErrors(['user_type_id' => 'Tipo de usuário inválido.'])->withInput();
+        }
 
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'user_type_id' => $validated['user_type_id']
+            'user_type_id' => $userType->id
         ]);
 
         return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');

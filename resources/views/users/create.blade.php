@@ -41,11 +41,11 @@
             </div>
 
             <div class="mb-4">
-                <label for="user_type_id" class="block text-gray-700 text-sm font-bold mb-2">User Type:</label>
+                <label for="user_type_id" class="block text-gray-700 text-sm font-bold mb-2">Tipo de Usuário:</label>
                 <select name="user_type_id" id="user_type_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    <option value="">Select type</option>
+                    <option value="">Selecione:</option>
                     <option value="Administrador" {{ old('user_type_id') == 'Administrador' ? 'selected' : '' }}>Administrator</option>
-                    <option value="Funcionário" {{ old('user_type_id') == 'Funcionário' ? 'selected' : '' }}>Employee</option>
+                    <option value="Funcionário" {{ old('user_type_id') == 'Funcionário' ? 'selected' : '' }}>Funcionário</option>
                 </select>
                 @error('user_type_id')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>

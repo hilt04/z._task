@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([UserSeeder::class]);
         // Create user types if they don't exist
         if (!UserType::where('tipo', 'Administrador')->exists()) {
             UserType::create(['tipo' => 'Administrador']);
